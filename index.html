@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown to Our Love Reunion</title>
+    <style>
+        body {
+            font-family: 'Georgia', serif;
+            text-align: center;
+            background: linear-gradient(to right, #ff758c, #ff7eb3);
+            color: white;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+        }
+        h1, h2 {
+            font-family: 'Dancing Script', cursive;
+        }
+        .countdown {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-top: 20px;
+            animation: pulse 2s infinite;
+        }
+        .section {
+            margin-top: 40px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 1.5s;
+        }
+        .slideshow-container {
+            position: relative;
+            max-width: 100%;
+            margin: auto;
+        }
+        .mySlides {
+            display: none;
+            width: 100%;
+            border-radius: 15px;
+            animation: fade 1.5s;
+        }
+        .collage {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+        .collage img {
+            width: 45%;
+            border-radius: 15px;
+            transition: transform 0.3s;
+        }
+        .collage img:hover {
+            transform: scale(1.1);
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes fade {
+            from { opacity: 0.5; }
+            to { opacity: 1; }
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Counting Down to Our Love Story's Next Chapter</h1>
+        <div class="countdown" id="countdown"></div>
+        
+        <div class="section">
+            <h2>Moments That Make Us</h2>
+            <div class="slideshow-container">
+                <img class="mySlides" src="m1.jpg" alt="Memory 1">
+                <img class="mySlides" src="m2.jpg" alt="Memory 2">
+                <img class="mySlides" src="m3.jpg" alt="Memory 3">
+                <img class="mySlides" src="m4.jpg" alt="Memory 4">
+                <img class="mySlides" src="m5.jpg" alt="Memory 5">
+                <img class="mySlides" src="m6.jpg" alt="Memory 6">
+                <img class="mySlides" src="m7.jpg" alt="Memory 7">
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>Places Our Hearts Call Home</h2>
+            <div class="collage">
+                <img src="p1.jpg" alt="Mumbai Spot 1">
+                <img src="p2.jpg" alt="Mumbai Spot 2">
+                <img src="p3.jpg" alt="Mumbai Spot 3">
+                <img src="p4.jpg" alt="Mumbai Spot 4">
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>Flavors of Our Love</h2>
+            <div class="collage">
+                <img src="f1.jpg" alt="Food 1">
+                <img src="f2.jpg" alt="Food 2">
+                <img src="f3.jpg" alt="Food 3">
+                <img src="f4.jpg" alt="Food 4">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function updateCountdown() {
+            const targetDate = new Date("February 21, 2025 23:20:00").getTime();
+            const now = new Date().getTime();
+            const difference = targetDate - now;
+
+            const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+            document.getElementById("countdown").innerHTML = 
+                `${days} Days ${hours} Hours ${minutes} Minutes ${seconds} Seconds`;
+        }
+        setInterval(updateCountdown, 1000);
+
+        let slideIndex = 0;
+        function showSlides() {
+            let slides = document.getElementsByClassName("mySlides");
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            slideIndex++;
+            if (slideIndex > slides.length) {slideIndex = 1}
+            slides[slideIndex - 1].style.display = "block";
+            setTimeout(showSlides, 2000);
+        }
+        showSlides();
+    </script>
+</body>
+</html>
