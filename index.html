@@ -13,20 +13,26 @@
             margin: 0;
             padding: 0;
         }
+
         .container {
             max-width: 800px;
             margin: auto;
             padding: 20px;
+            position: relative;
+            z-index: 2;
         }
+
         h1, h2 {
             font-family: 'Dancing Script', cursive;
         }
+
         .countdown {
             font-size: 2.5rem;
             font-weight: bold;
             margin-top: 20px;
             animation: pulse 2s infinite;
         }
+
         .section {
             margin-top: 40px;
             padding: 20px;
@@ -35,23 +41,27 @@
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
             animation: fadeIn 1.5s;
         }
+
         .slideshow-container {
             position: relative;
             max-width: 100%;
             margin: auto;
         }
+
         .mySlides {
             display: none;
             width: 100%;
             border-radius: 15px;
             animation: fade 1.5s;
         }
+
         .collage {
             display: flex;
             flex-wrap: wrap;
             gap: 10px;
             justify-content: center;
         }
+
         .collage img {
             width: 45%;
             border-radius: 15px;
@@ -60,6 +70,41 @@
         .collage img:hover {
             transform: scale(1.1);
         }
+
+        /* Love Quotes Section */
+        .love-quote {
+            font-size: 1.5rem;
+            font-style: italic;
+            margin-top: 30px;
+            animation: fade 2s infinite alternate;
+        }
+
+        /* Floating hearts & stars */
+        .floating-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .heart, .star {
+            position: absolute;
+            font-size: calc(10px + 1vw);
+            opacity: 0.6;
+            animation: float 10s infinite ease-in-out;
+        }
+
+        .heart {
+            color: #ff4d6d;
+        }
+
+        .star {
+            color: #f7e4b2;
+        }
+
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
@@ -68,18 +113,30 @@
             from { opacity: 0.5; }
             to { opacity: 1; }
         }
+
         @keyframes pulse {
             0% { transform: scale(1); }
             50% { transform: scale(1.05); }
             100% { transform: scale(1); }
         }
+
+        @keyframes float {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0); }
+        }
     </style>
 </head>
 <body>
+    <div class="floating-container"></div> <!-- Hearts & Stars Background -->
+
     <div class="container">
         <h1>Counting Down to Our Love Story's Next Chapter</h1>
         <div class="countdown" id="countdown"></div>
-        
+
+        <!-- Love Quotes Section -->
+        <div class="love-quote" id="love-quote"></div>
+
         <div class="section">
             <h2>Moments That Make Us</h2>
             <div class="slideshow-container">
@@ -92,7 +149,7 @@
                 <img class="mySlides" src="m7.jpg" alt="Memory 7">
             </div>
         </div>
-        
+
         <div class="section">
             <h2>Places Our Hearts Call Home</h2>
             <div class="collage">
@@ -127,8 +184,58 @@
 
             document.getElementById("countdown").innerHTML = 
                 `${days} Days ${hours} Hours ${minutes} Minutes ${seconds} Seconds`;
+
+            if (difference <= 0) {
+                document.getElementById("countdown").innerHTML = "Welcome to Chhatrapati Shivaji Maharaj International Airport, Welcome back to Mumbai!";
+            }
         }
+
+        function createFloatingHeartsAndStars() {
+            const floatingContainer = document.querySelector(".floating-container");
+
+            for (let i = 0; i < 50; i++) {  // Generates 50 hearts & stars
+                const heart = document.createElement('span');
+                heart.classList.add('heart');
+                heart.innerHTML = "❤️";
+                heart.style.left = `${Math.random() * 100}vw`;
+                heart.style.top = `${Math.random() * 100}vh`;
+                heart.style.animationDelay = `${Math.random() * 0.000005}s`;
+                floatingContainer.appendChild(heart);
+
+                const star = document.createElement('span');
+                star.classList.add('star');
+                star.innerHTML = "⭐";
+                star.style.left = `${Math.random() * 100}vw`;
+                star.style.top = `${Math.random() * 100}vh`;
+                star.style.animationDelay = `${Math.random() * 0.000005}s`;
+                floatingContainer.appendChild(star);
+            }
+        }
+
+        function updateLoveQuote() {
+            const quotes = [
+                "Love is not about how many days, months, or years you have been together. It’s all about how much you love each other every single day.",
+                "Every moment we spend together is like a beautiful dream come true.",
+                "Distance means so little when someone means so much.",
+                "You are my today and all of my tomorrows.",
+                "I find pieces of you in every song I listen to.",
+                "You make my world brighter, even from miles away."
+            ];
+            const quoteElement = document.getElementById("love-quote");
+            let index = 0;
+
+            function changeQuote() {
+                quoteElement.innerHTML = `"${quotes[index]}"`;
+                index = (index + 1) % quotes.length;
+            }
+            
+            changeQuote();
+            setInterval(changeQuote, 5000); // Change quote every 5 seconds
+        }
+
         setInterval(updateCountdown, 1000);
+        createFloatingHeartsAndStars();
+        updateLoveQuote();
 
         let slideIndex = 0;
         function showSlides() {
