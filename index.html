@@ -71,7 +71,6 @@
             transform: scale(1.1);
         }
 
-        /* Love Quotes Section */
         .love-quote {
             font-size: 1.5rem;
             font-style: italic;
@@ -79,7 +78,6 @@
             animation: fade 2s infinite alternate;
         }
 
-        /* Floating hearts & stars */
         .floating-container {
             position: fixed;
             top: 0;
@@ -128,13 +126,12 @@
     </style>
 </head>
 <body>
-    <div class="floating-container"></div> <!-- Hearts & Stars Background -->
+    <div class="floating-container"></div> 
 
     <div class="container">
         <h1>Counting Down to Our Love Story's Next Chapter</h1>
         <div class="countdown" id="countdown"></div>
 
-        <!-- Love Quotes Section -->
         <div class="love-quote" id="love-quote"></div>
 
         <div class="section">
@@ -196,7 +193,7 @@
         function createFloatingHeartsAndStars() {
             const floatingContainer = document.querySelector(".floating-container");
 
-            for (let i = 0; i < 50; i++) {  // Generates 50 hearts & stars
+            for (let i = 0; i < 50; i++) { 
                 const heart = document.createElement('span');
                 heart.classList.add('heart');
                 heart.innerHTML = "❤️";
@@ -233,7 +230,7 @@
             }
             
             changeQuote();
-            setInterval(changeQuote, 5000); // Change quote every 5 seconds
+            setInterval(changeQuote, 5000); 
         }
 
         setInterval(updateCountdown, 1000);
