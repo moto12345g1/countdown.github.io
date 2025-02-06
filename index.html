@@ -211,8 +211,7 @@
 
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     <script>
-        // Initialize map
-        const map = L.map('map').setView([8.5241, 77.2150], 6); // Set initial position over Thiruvananthapuram
+        const map = L.map('map').setView([8.5241, 77.2150], 6); 
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
@@ -225,40 +224,37 @@
         });
     
         const flightPath = [
-            [8.5241, 77.2150], // Thiruvananthapuram
-            [19.0918, 72.8777]  // Mumbai
+            [8.5241, 77.2150], 
+            [19.0918, 72.8777]  
         ];
     
         const polyline = L.polyline(flightPath, {color: 'blue'}).addTo(map);
         let flightMarker = L.marker(flightPath[0], {icon: flightIcon}).addTo(map);
     
-        // Flight logs
         const flightLogs = [
-            { date: '2025-02-06', departure: '20:50', arrival: '23:10', duration: 2.33 }, // February 6, 2025
-            { date: '2025-02-05', departure: '20:48', arrival: '22:54', duration: 2.1 },  // February 5, 2025
-            { date: '2025-02-04', departure: '20:49', arrival: '22:55', duration: 2.1 },  // February 4, 2025
-            { date: '2025-02-03', departure: '20:58', arrival: '22:59', duration: 2.02 },  // February 3, 2025
-            { date: '2025-02-02', departure: '20:47', arrival: '22:38', duration: 1.85 },  // February 2, 2025
-            { date: '2025-02-01', departure: '21:34', arrival: '23:29', duration: 1.92 },  // February 1, 2025
-            { date: '2025-01-31', departure: '20:55', arrival: '23:20', duration: 2.42 },  // January 31, 2025
-            { date: '2025-01-30', departure: '21:40', arrival: '23:26', duration: 1.75 },  // January 30, 2025
-            // Add more logs as required
+            { date: '2025-02-06', departure: '20:40', arrival: '23:20', duration: 2.33 }, 
+            { date: '2025-02-05', departure: '20:40', arrival: '23:20', duration: 2.1 },  
+            { date: '2025-02-04', departure: '20:40', arrival: '23:20', duration: 2.1 },  
+            { date: '2025-02-03', departure: '20:40', arrival: '23:20', duration: 2.02 }, 
+            { date: '2025-02-02', departure: '20:40', arrival: '23:20', duration: 1.85 }, 
+            { date: '2025-02-01', departure: '20:40', arrival: '23:20', duration: 1.92 }, 
+            { date: '2025-01-31', departure: '20:40', arrival: '23:20', duration: 2.42 }, 
+            { date: '2025-01-30', departure: '20:40', arrival: '23:20', duration: 1.75 }
         ];
     
         const flightStatus = document.getElementById('flight-status');
         const progressBar = document.getElementById('progress-bar');
     
-        // Function to get today's flight schedule
         function getFlightTimes() {
-            const today = new Date().toISOString().split('T')[0]; // Get current date in 'YYYY-MM-DD' format
-            const logForToday = flightLogs.find(log => log.date === today) || flightLogs[flightLogs.length - 1]; // If no log for today, use the latest log
+            const today = new Date().toISOString().split('T')[0]; 
+            const logForToday = flightLogs.find(log => log.date === today) || flightLogs[flightLogs.length - 1]; 
             const departureTime = new Date(`${logForToday.date} ${logForToday.departure}:00`);
             const arrivalTime = new Date(`${logForToday.date} ${logForToday.arrival}:00`);
             return { departureTime, arrivalTime, duration: logForToday.duration };
         }
     
         let { departureTime, arrivalTime, duration } = getFlightTimes();
-        let flightDuration = duration * 60 * 60 * 1000; // duration in milliseconds
+        let flightDuration = duration * 60 * 60 * 1000; 
     
         function updateFlightStatus() {
             const now = new Date();
@@ -310,7 +306,7 @@
         function createFloatingHeartsAndStars() {
             const floatingContainer = document.querySelector(".floating-container");
 
-            for (let i = 0; i < 50; i++) {  // Generates 50 hearts & stars
+            for (let i = 0; i < 50; i++) {  
                 const heart = document.createElement('span');
                 heart.classList.add('heart');
                 heart.innerHTML = "❤️";
