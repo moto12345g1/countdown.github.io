@@ -155,13 +155,12 @@
     </style>
 </head>
 <body>
-    <div class="floating-container"></div> <!-- Hearts & Stars Background -->
+    <div class="floating-container"></div> 
 
     <div class="container">
         <h1>Counting Down to Our Love Story's Next Chapter</h1>
         <div class="countdown" id="countdown"></div>
 
-        <!-- Love Quotes Section -->
         <div class="love-quote" id="love-quote"></div>
 
         <div class="section">
@@ -197,7 +196,6 @@
             </div>
         </div>
 
-        <!-- Flight Tracker Section -->
         <div class="section">
             <h2>Live Flight Tracker</h2>
             <div id="map"></div>
@@ -246,11 +244,11 @@
     
         function getFlightTimes() {
             const today = new Date().toISOString().split('T')[0]; 
-            const logForToday = flightLogs.find(log => log.date === today) || flightLogs[flightLogs.length - 1]; 
-            const departureTime = new Date(`${logForToday.date} ${logForToday.departure}:00`);
-            const arrivalTime = new Date(`${logForToday.date} ${logForToday.arrival}:00`);
-            return { departureTime, arrivalTime, duration: logForToday.duration };
+            const departureTime = new Date(`${today} 20:40:00`);
+            const arrivalTime = new Date(`${today} 23:20:00`);
+            return { departureTime, arrivalTime, duration: 2.67 };
         }
+        
     
         let { departureTime, arrivalTime, duration } = getFlightTimes();
         let flightDuration = duration * 60 * 60 * 1000; 
@@ -260,27 +258,33 @@
             const timeUntilDeparture = departureTime - now;
             const timeInFlight = now - departureTime;
             const timeUntilArrival = arrivalTime - now;
-    
+        
             if (timeUntilDeparture > 0) {
                 flightStatus.textContent = `Time until departure: ${Math.ceil(timeUntilDeparture / 1000 / 60)} minutes`;
                 progressBar.style.width = '0%';
                 flightMarker.setLatLng(flightPath[0]);
+                map.setView(flightPath[0], 6); 
             } else if (timeUntilArrival > 0) {
                 const progress = Math.min((timeInFlight / flightDuration) * 100, 100);
                 progressBar.style.width = progress + '%';
-                flightStatus.textContent = `In-flight: ${Math.ceil(timeInFlight / 1000 / 60)} minutes`;
+                flightStatus.textContent = `In-flight: ${Math.ceil(timeUntilArrival / 1000 / 60)} minutes remaining`;
+        
                 const flightLatLng = L.latLng(
                     flightPath[0][0] + (flightPath[1][0] - flightPath[0][0]) * (timeInFlight / flightDuration),
                     flightPath[0][1] + (flightPath[1][1] - flightPath[0][1]) * (timeInFlight / flightDuration)
                 );
+        
                 flightMarker.setLatLng(flightLatLng);
+                map.setView(flightLatLng, 6); 
             } else {
                 flightStatus.textContent = "Flight has landed!";
                 progressBar.style.width = '100%';
+                flightMarker.setLatLng(flightPath[1]);
+                map.setView(flightPath[1], 10); 
             }
-        }
+        }               
     
-        setInterval(updateFlightStatus, 500);
+        setInterval(updateFlightStatus, 50);
         updateFlightStatus();
     </script>    
     <script>
