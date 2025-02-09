@@ -72,7 +72,6 @@
             transform: scale(1.1);
         }
 
-        /* Love Quotes Section */
         .love-quote {
             font-size: 1.5rem;
             font-style: italic;
@@ -80,7 +79,6 @@
             animation: fade 2s infinite alternate;
         }
 
-        /* Floating hearts & stars */
         .floating-container {
             position: fixed;
             top: 0;
@@ -104,6 +102,54 @@
         .star {
             color: #f7e4b2;
         }
+
+        .flip-card {
+            background-color: transparent;
+            width: 45%;
+            height: 400px;
+            perspective: 1000px;
+            cursor: pointer;
+        }
+        
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+        
+        .flip-card.flipped .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+        
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 15px;
+            backface-visibility: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .flip-card-front img {
+            width: 100%;
+            height: 100%;
+            border-radius: 15px;
+            object-fit: cover;
+        }
+        
+        .flip-card-back {
+            background: rgba(255, 255, 255, 0.9);
+            color: #ff4d6d;
+            font-size: 1.2rem;
+            font-weight: bold;
+            transform: rotateY(180deg);
+            padding: 2px;
+        }       
 
         @keyframes fadeIn {
             from { opacity: 0; }
@@ -179,22 +225,100 @@
         <div class="section">
             <h2>Places Our Hearts Call Home</h2>
             <div class="collage">
-                <img src="p1.jpg" alt="Mumbai Spot 1">
-                <img src="p2.jpg" alt="Mumbai Spot 2">
-                <img src="p3.jpg" alt="Mumbai Spot 3">
-                <img src="p4.jpg" alt="Mumbai Spot 4">
+                <div class="flip-card" onclick="flipCard(this)" data-message="Our first walk by the sea">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <img src="p1.jpg" alt="Mumbai Spot 1">
+                        </div>
+                        <div class="flip-card-back">
+                            <p>I wish time stood still whenever I am with you. 🌊✨</p>
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="flip-card" onclick="flipCard(this)" data-message="The sunset we watched together">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <img src="p2.jpg" alt="Mumbai Spot 2">
+                        </div>
+                        <div class="flip-card-back">
+                            <p>Through the lens of love, every moment becomes art. 🎨📸</p>
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="flip-card" onclick="flipCard(this)" data-message="Our secret favorite café">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <img src="p3.jpg" alt="Mumbai Spot 3">
+                        </div>
+                        <div class="flip-card-back">
+                            <p>Where we cheered our hearts out. 🏏</p>
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="flip-card" onclick="flipCard(this)" data-message="That beautiful rainy evening">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <img src="p4.jpg" alt="Mumbai Spot 4">
+                        </div>
+                        <div class="flip-card-back">
+                            <p>Meow meowwwwww. 🐱💛</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         
         <div class="section">
             <h2>Flavors of Our Love</h2>
             <div class="collage">
-                <img src="f1.jpg" alt="Food 1">
-                <img src="f2.jpg" alt="Food 2">
-                <img src="f3.jpg" alt="Food 3">
-                <img src="f4.jpg" alt="Food 4">
+                <div class="flip-card" onclick="flipCard(this)" data-message="Our favorite street food!">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <img src="f1.jpg" alt="Food 1">
+                        </div>
+                        <div class="flip-card-back">
+                            <p>The perfect feast, just like us—spiced with love and laughter. 🍕🥖</p>
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="flip-card" onclick="flipCard(this)" data-message="The dessert that made us smile">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <img src="f2.jpg" alt="Food 2">
+                        </div>
+                        <div class="flip-card-back">
+                            <p>Corndoggsss. 🍹✨</p>
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="flip-card" onclick="flipCard(this)" data-message="Midnight snack memories">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <img src="f3.jpg" alt="Food 3">
+                        </div>
+                        <div class="flip-card-back">
+                            <p>Desserts as sweet as our love story. 🍰💖</p>
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="flip-card" onclick="flipCard(this)" data-message="Our cozy coffee date">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <img src="f4.jpg" alt="Food 4">
+                        </div>
+                        <div class="flip-card-back">
+                            <p>Savoring every bite, just like we savor every moment together. 🍣🔥</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
+        </div>        
 
         <div class="section">
             <h2>Live Flight Tracker</h2>
@@ -365,6 +489,10 @@
             setTimeout(showSlides, 2000);
         }
         showSlides();
+
+        function flipCard(card) {
+            card.classList.toggle("flipped");
+        }        
     </script>
 </body>
 </html>
